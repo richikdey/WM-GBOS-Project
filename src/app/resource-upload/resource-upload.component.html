@@ -1,0 +1,282 @@
+<div class="mat-typography resource-upload-container">
+  <div class="resource-upload-header">
+    <h1 class="mat-display-2">Resource Upload</h1>
+  </div>
+
+
+  <div class="resource-upload-display-container" *ngFor="let resource of resourcedetailsArray">
+    <div class="resource-upload-display-control">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center" class="fx-layout-form-control">
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <label disabled>Project ID: </label>
+            <mat-form-field>
+              <mat-select [value]=resource.projectId disabled>
+                <mat-option *ngFor="let id of projectdetails" [value]="id.id" disabled>
+                  {{id.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <label disabled>Project Name: </label>
+            <mat-form-field>
+              <mat-select [value]=resource.projectName disabled>
+                <mat-option *ngFor="let name of projectdetails" [value]="name.name" disabled>
+                  {{name.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="Resource Name" [value]=resource.name disabled>
+            </mat-form-field>
+          </mat-card>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center" class="fx-layout-form-control">
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="Resource WM ID" [value]=resource.wmId disabled>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="Resource Cognizant ID" [value]=resource.cogId disabled>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="FG Worker ID" [value]=resource.fgWorkId disabled>
+            </mat-form-field>
+          </mat-card>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center" class="fx-layout-form-control">
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="FG Contract" [value]=resource.fgContract disabled>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <div class="radio-btn-grp">
+              <label>Project Role : </label>
+              <mat-radio-group [value]="resource.billability">
+                <mat-radio-button class="radio-btn-value" value="B" disabled>Billable</mat-radio-button>
+                <mat-radio-button class="radio-btn-value" value="NB" disabled>Non-Billable</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <div class="radio-btn-grp">
+              <label>Location : </label>
+              <mat-radio-group [value]="resource.location">
+                <mat-radio-button class="radio-btn-value" value="On" disabled>Onsite</mat-radio-button>
+                <mat-radio-button class="radio-btn-value" value="Off" disabled>Off-shore</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center" class="fx-layout-form-control">
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="Start Date" [value]=resource.pickerStart disabled>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="End Date" [value]=resource.pickerEnd disabled>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="Allocation (in %)" [value]=resource.allocation disabled>
+            </mat-form-field>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="resource-upload-form-container">
+    <form #resourceForm="ngForm" class="resource-upload-form-control">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center" class="fx-layout-form-control">
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <mat-select placeholder="Project ID" (selectionChange)="selectProjName($event.value)" id="projectId" required [(ngModel)]="resourcedetails.projectId"
+                name="projectId" #projectId="ngModel">
+                <mat-option *ngFor="let id of projectdetails" [value]="id.id">
+                  {{id.id}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <mat-select placeholder="Project Name" (selectionChange)="selectProjID($event.value)" id="projectName" required [(ngModel)]="resourcedetails.projectName"
+                name="projectName" #projectName="ngModel">
+                <mat-option *ngFor="let name of projectdetails" [value]="name.name">
+                  {{name.name}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="Resource Name" id="name" required [(ngModel)]="resourcedetails.name" name="name" #name="ngModel">
+            </mat-form-field>
+          </mat-card>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center" class="fx-layout-form-control">
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="Resource WM ID" id="wmId" required [(ngModel)]="resourcedetails.wmId" name="wmId" #wmId="ngModel">
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="Resource CTS ID" id="cogId" required [(ngModel)]="resourcedetails.cogId" name="cogId" #cogId="ngModel">
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="FG Worker ID" id="fgWorkId" required [(ngModel)]="resourcedetails.fgWorkId" name="name" #name="ngModel">
+            </mat-form-field>
+          </mat-card>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center" class="fx-layout-form-control">
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput placeholder="FG Contract" id="fgContract" required [(ngModel)]="resourcedetails.fgContract" name="wmId" #wmId="ngModel">
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <div class="radio-btn-grp">
+              <label>Project Role : </label>
+              <mat-radio-group id="billability" required [(ngModel)]="resourcedetails.billability" name="billability" #billability="ngModel">
+                <mat-radio-button class="radio-btn-value" value="B">Billable</mat-radio-button>
+                <mat-radio-button class="radio-btn-value" value="NB">Non-Billable</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <div class="radio-btn-grp">
+              <label>Location : </label>
+              <mat-radio-group id="location" required [(ngModel)]="resourcedetails.location" name="location" #location="ngModel">
+                <mat-radio-button class="radio-btn-value" value="On">Onsite</mat-radio-button>
+                <mat-radio-button class="radio-btn-value" value="Off">Offshore</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center" class="fx-layout-form-control">
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput [matDatepicker]="pickerStart" placeholder="Start Date" id="pickerStart" required [(ngModel)]="resourcedetails.pickerStart"
+                name="pickerStart" #location="ngModel">
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStart></mat-datepicker>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput [matDatepicker]="pickerEnd" placeholder="End Date" id="pickerEnd" required [(ngModel)]="resourcedetails.pickerEnd"
+                name="pickerEnd" #location="ngModel">
+                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEnd></mat-datepicker>
+            </mat-form-field>
+          </mat-card>
+        </div>
+
+        <div fxFlex="30%" fxFlexFill>
+          <mat-card class="controles-container">
+            <mat-form-field>
+              <input matInput type="number" placeholder="Allocation (in %)" id="allocation" [(ngModel)]="resourcedetails.allocation" name="allocation"
+                #allocation="ngModel">
+            </mat-form-field>
+          </mat-card>
+        </div>
+      </div>
+
+      <div class="form-buttons" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="space-between center">
+        <div fxFlex="auto" fxFlexFill fxFlexAlign="end" class="button1">
+          <button mat-flat-button color="warn" class="add-another-resource-button" (click)="addAnotherResource(resourceForm)" [disabled]="!resourceForm.valid">
+			   	<span><b>Add Another Resource</b></span>
+         </button>
+        </div>
+
+        <div fxFlex="auto" fxFlexFill fxFlexAlign="start" class="button2">
+          <button mat-flat-button color="primary" class="submit-resource-button" (click)="submitResources()"
+            [disabled]="!resourceForm.valid">
+            <span><b>Submit</b></span>
+            </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
